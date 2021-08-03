@@ -47,7 +47,7 @@ class SemKITTI_demo(data.Dataset):
         return len(self.im_idx)
 
     def __getitem__(self, index):
-        raw_data = np.fromfile(self.im_idx[index], dtype=np.float32).reshape((-1, 4))
+        raw_data = np.fromfile(self.im_idx[index], dtype=np.float32).reshape((-1, 3))
         if self.imageset == 'demo':
             annotated_data = np.expand_dims(np.zeros_like(raw_data[:, 0], dtype=int), axis=1)
         elif self.imageset == 'val':
@@ -87,13 +87,13 @@ class SemKITTI_sk(data.Dataset):
         return len(self.im_idx)
 
     def __getitem__(self, index):
-        raw_data = np.fromfile(self.im_idx[index], dtype=np.float32).reshape((-1, 4))
+        raw_data = np.fromfile(self.im_idx[index], dtype=np.float32).reshape((-1, 3)) # Changed from (-1,4)
         if self.imageset == 'test':
             annotated_data = np.expand_dims(np.zeros_like(raw_data[:, 0], dtype=int), axis=1)
         else:
             annotated_data = np.fromfile(self.im_idx[index].replace('velodyne', 'labels')[:-3] + 'label',
-                                         dtype=np.uint32).reshape((-1, 1))
-            annotated_data = annotated_data & 0xFFFF  # delete high 16 digits binary
+                                         dtype=np.uint16).reshape((-1, 1))
+            annotated_data = annotated_data # & 0xFFFF  # delete high 16 digits binary
             annotated_data = np.vectorize(self.learning_map.__getitem__)(annotated_data)
 
         data_tuple = (raw_data[:, :3], annotated_data.astype(np.uint8))

@@ -11,7 +11,7 @@ model_params:
     - 360
     - 32
 
-  fea_dim: 9
+  fea_dim: 8
   out_fea_dim: 256
   num_class: 11 # Changed from 20
   num_input_features: 16
@@ -41,17 +41,17 @@ dataset_params:
 ###################
 ## Data_loader options
 train_data_loader:
-  data_path: "/data/dataset/semantic_kitti/data_semkitti/dataset/sequences/"
+  data_path: "dataset/sequences/"
   imageset: "train"
-  return_ref: True
+  return_ref: False # Changed from True
   batch_size: 2
   shuffle: True
   num_workers: 4
 
 val_data_loader:
-  data_path: "/data/dataset/semantic_kitti/data_semkitti/dataset/sequences/"
+  data_path: "dataset/sequences/"
   imageset: "val"
-  return_ref: True
+  return_ref: False # Changed from True
   batch_size: 1
   shuffle: False
   num_workers: 4

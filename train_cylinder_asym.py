@@ -78,6 +78,7 @@ def main(args):
         loss_list = []
         pbar = tqdm(total=len(train_dataset_loader))
         time.sleep(10)
+        print(f'Shape of train_vox_label is {train_vox_label.shape}')
         # lr_scheduler.step(epoch)
         for i_iter, (_, train_vox_label, train_grid, _, train_pt_fea) in enumerate(train_dataset_loader):
             if global_iter % check_iter == 0 and epoch >= 1:
@@ -130,6 +131,7 @@ def main(args):
 
             # forward + backward + optimize
             outputs = my_model(train_pt_fea_ten, train_vox_ten, train_batch_size)
+            print(f'Shape of outputs is {outputs.shape}')
             loss = lovasz_softmax(torch.nn.functional.softmax(outputs), point_label_tensor, ignore=0) + loss_func(
                 outputs, point_label_tensor)
             loss.backward()

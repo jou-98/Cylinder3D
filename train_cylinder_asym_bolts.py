@@ -13,7 +13,7 @@ import torch.optim as optim
 from tqdm import tqdm
 
 from utils.metric_util import per_class_iu, fast_hist_crop
-from dataloader.pc_dataset import get_SemKITTI_label_name
+from dataloader.pc_dataset import get_bolts_label_name
 from builder import data_builder, model_builder, loss_builder
 from config.config import load_config_data
 
@@ -48,9 +48,9 @@ def main(args):
     model_load_path = train_hypers['model_load_path']
     model_save_path = train_hypers['model_save_path']
 
-    SemKITTI_label_name = get_SemKITTI_label_name(dataset_config["label_mapping"])
-    unique_label = np.asarray(sorted(list(SemKITTI_label_name.keys())))[1:] - 1
-    unique_label_str = [SemKITTI_label_name[x] for x in unique_label + 1]
+    bolts_label_name = get_bolts_label_name(dataset_config["label_mapping"])
+    unique_label = np.asarray(sorted(list(bolts_label_name.keys())))[1:] - 1
+    unique_label_str = [bolts_label_name[x] for x in unique_label + 1]
 
     my_model = model_builder.build(model_config)
     if os.path.exists(model_load_path):

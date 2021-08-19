@@ -2,7 +2,7 @@
 # author: Xinge
 
 """
-SemKITTI dataloader
+Bolts dataloader
 """
 import os
 import numpy as np

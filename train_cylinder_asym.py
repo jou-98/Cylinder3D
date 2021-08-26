@@ -78,7 +78,6 @@ def main(args):
         loss_list = []
         pbar = tqdm(total=len(train_dataset_loader))
         time.sleep(10)
-        print(f'Shape of train_vox_label is {train_vox_label.shape}')
         # lr_scheduler.step(epoch)
         for i_iter, (_, train_vox_label, train_grid, _, train_pt_fea) in enumerate(train_dataset_loader):
             if global_iter % check_iter == 0 and epoch >= 1:

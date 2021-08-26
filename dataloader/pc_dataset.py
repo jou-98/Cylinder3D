@@ -376,7 +376,7 @@ class Rockbolts_sk(data.Dataset):
             annotated_data = np.expand_dims(np.zeros_like(raw_data[:, 0], dtype=int), axis=1)
         else:
             annotated_data = np.fromfile(self.im_idx[index].replace('velodyne', 'labels')[:-3] + 'label',
-                                         dtype=np.ubyte).reshape((-1, 1))
+                                         dtype=np.ubyte).astype(np.uint16).reshape((-1, 1))
             annotated_data = annotated_data # & 0xFFFF  # delete high 16 digits binary
             annotated_data = np.vectorize(self.learning_map.__getitem__)(annotated_data)
 

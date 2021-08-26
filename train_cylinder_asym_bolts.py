@@ -61,11 +61,12 @@ def main(args):
 
     loss_func, lovasz_softmax = loss_builder.build(wce=True, lovasz=True,
                                                    num_class=num_class, ignore_label=ignore_label)
-
+    print(f'Loss builder finished initializing loss classes')
     train_dataset_loader, val_dataset_loader = data_builder.build(dataset_config,
                                                                   train_dataloader_config,
                                                                   val_dataloader_config,
                                                                   grid_size=grid_size)
+    print(f'Data builder finished initializing dataloaders')
 
     # training
     epoch = 0

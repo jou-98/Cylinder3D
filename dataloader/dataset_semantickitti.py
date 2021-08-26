@@ -161,6 +161,7 @@ class cylinder_dataset(data.Dataset):
         self.trans_std = trans_std
 
         self.noise_rotation = np.random.uniform(min_rad, max_rad)
+        print(f'Cylinder dataset initialized.')
 
     def __len__(self):
         'Denotes the total number of samples'

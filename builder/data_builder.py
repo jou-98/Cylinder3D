@@ -30,7 +30,7 @@ def build(dataset_config,
                                 return_ref=train_ref, label_mapping=label_mapping, nusc=nusc)
     val_pt_dataset = SemKITTI(data_path, imageset=val_imageset,
                               return_ref=val_ref, label_mapping=label_mapping, nusc=nusc)
-
+    
     train_dataset = get_model_class(dataset_config['dataset_type'])(
         train_pt_dataset,
         grid_size=grid_size,
@@ -52,7 +52,7 @@ def build(dataset_config,
         min_volume_space=dataset_config['min_volume_space'],
         ignore_label=dataset_config["ignore_label"],
     )
-
+    print(f'Dataset loaded')
     train_dataset_loader = torch.utils.data.DataLoader(dataset=train_dataset,
                                                        batch_size=train_dataloader_config["batch_size"],
                                                        collate_fn=collate_fn_BEV,

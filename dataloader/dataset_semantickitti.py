@@ -257,7 +257,7 @@ class cylinder_dataset(data.Dataset):
         processed_label = np.ones(self.grid_size, dtype=np.uint8) * self.ignore_label
         label_voxel_pair = np.concatenate([grid_ind, labels], axis=1)
         label_voxel_pair = label_voxel_pair[np.lexsort((grid_ind[:, 0], grid_ind[:, 1], grid_ind[:, 2])), :]
-        print(f'Shape of label-voxel pair is {label_voxel_pair.shape}, shape of processed label is {processed_label.shape}')
+        #print(f'Shape of label-voxel pair is {label_voxel_pair.shape}, shape of processed label is {processed_label.shape}')
         processed_label = nb_process_label(np.copy(processed_label), label_voxel_pair)
         data_tuple = (voxel_position, processed_label)
 

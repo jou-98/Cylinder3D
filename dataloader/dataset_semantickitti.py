@@ -147,6 +147,7 @@ class cylinder_dataset(data.Dataset):
                  scale_aug=False,
                  transform_aug=False, trans_std=[0.1, 0.1, 0.1],
                  min_rad=-np.pi / 4, max_rad=np.pi / 4):
+        start = time.time()
         self.point_cloud_dataset = in_dataset
         self.grid_size = np.asarray(grid_size)
         self.rotate_aug = rotate_aug
@@ -161,7 +162,7 @@ class cylinder_dataset(data.Dataset):
         self.trans_std = trans_std
 
         self.noise_rotation = np.random.uniform(min_rad, max_rad)
-        print(f'Cylinder dataset initialized.')
+        print(f'Cylinder dataset initialized, took {time.time()-start}s.')
 
     def __len__(self):
         'Denotes the total number of samples'

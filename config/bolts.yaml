@@ -9,7 +9,7 @@ model_params:
   output_shape:
     - 4800
     - 360
-    - 64
+    - 640
 
   fea_dim: 8
   out_fea_dim: 256

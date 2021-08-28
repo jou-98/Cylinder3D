@@ -162,6 +162,7 @@ def main(args):
             global_iter += 1
             if global_iter % check_iter == 0:
                 if len(loss_list) > 0:
+                    print(loss_list)
                     print('epoch %d iter %5d, loss: %.3f\n' %
                           (epoch, i_iter, np.mean(loss_list)))
                 else:

@@ -52,6 +52,7 @@ def main(args):
     unique_label_str = [bolts_label_name[x] for x in unique_label + 1]
 
     my_model = model_builder.build(model_config)
+    my_model = torch.nn.DataParallel(my_model,device_ids=[0,1])
     if os.path.exists(model_load_path):
         my_model = load_checkpoint(model_load_path, my_model)
     print(f'Model built.')
@@ -142,7 +143,6 @@ def main(args):
 
             # forward + backward + optimize
             outputs = my_model(train_pt_fea_ten, train_vox_ten, train_batch_size)
-            print(f'Shape of outputs is {outputs.shape}')
             loss = lovasz_softmax(torch.nn.functional.softmax(outputs), point_label_tensor, ignore=0) + loss_func(
                 outputs, point_label_tensor)
             loss.backward()

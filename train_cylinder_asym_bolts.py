@@ -52,7 +52,7 @@ def main(args):
     unique_label_str = [bolts_label_name[x] for x in unique_label + 1]
 
     my_model = model_builder.build(model_config)
-    my_model = torch.nn.DataParallel(my_model,device_ids=[0,1])
+    my_model = torch.nn.DataParallel(my_model)
     if os.path.exists(model_load_path):
         my_model = load_checkpoint(model_load_path, my_model)
     print(f'Model built.')
@@ -84,6 +84,7 @@ def main(args):
         r = torch.cuda.memory_reserved(0)
         a = torch.cuda.memory_allocated(0)
         #print(f'Percentage of memory free: {round((r-a)/t*100,2)}')
+        print(f'Currently using GPU number {torch.cuda.current_device()}.')
         for i_iter, (_, train_vox_label, train_grid, _, train_pt_fea) in enumerate(train_dataset_loader):
             """
             t = torch.cuda.get_device_properties(0).total_memory

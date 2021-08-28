@@ -7,9 +7,9 @@ model_params:
   model_architecture: "cylinder_asym"
 
   output_shape:
-    - 4800
+    - 480
     - 360
-    - 640
+    - 32
 
   fea_dim: 8
   out_fea_dim: 256

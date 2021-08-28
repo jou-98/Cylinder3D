@@ -52,7 +52,7 @@ def main(args):
     unique_label_str = [bolts_label_name[x] for x in unique_label + 1]
 
     my_model = model_builder.build(model_config)
-    my_model = torch.nn.DataParallel(my_model)
+    #my_model = torch.nn.DataParallel(my_model)
     if os.path.exists(model_load_path):
         my_model = load_checkpoint(model_load_path, my_model)
     print(f'Model built.')

@@ -163,7 +163,7 @@ def lovasz_softmax(probas, labels, classes='present', per_image=False, ignore=No
       per_image: compute the loss per image instead of per batch
       ignore: void class labels
     """
-    if torch.isnan(probas).any(): print(f'probas in lovasz_softmax has NaN!')
+    #if torch.isnan(probas).any(): print(f'probas in lovasz_softmax has NaN!')
     if per_image:
         loss = mean(lovasz_softmax_flat(*flatten_probas(prob.unsqueeze(0), lab.unsqueeze(0), ignore), classes=classes)
                           for prob, lab in zip(probas, labels))
@@ -179,8 +179,8 @@ def lovasz_softmax_flat(probas, labels, classes='present'):
       labels: [P] Tensor, ground truth labels (between 0 and C - 1)
       classes: 'all' for all, 'present' for classes present in labels, or a list of classes to average.
     """
-    if torch.isnan(probas).any(): print(f'probas in lovasz_softmax_flat has NaN!')
-    if torch.isnan(labels).any(): print(f'labels in lovasz_softmax_flat has NaN!')
+    #if torch.isnan(probas).any(): print(f'probas in lovasz_softmax_flat has NaN!')
+    #if torch.isnan(labels).any(): print(f'labels in lovasz_softmax_flat has NaN!')
     if probas.numel() == 0:
         # only void pixels, the gradients should be 0
         print(f'All void pixels in lovasz_softmax_flat!')

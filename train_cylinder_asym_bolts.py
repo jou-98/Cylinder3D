@@ -100,6 +100,7 @@ def main(args):
                         val_label_tensor = val_vox_label.type(torch.LongTensor).to(pytorch_device)
 
                         predict_labels = my_model(val_pt_fea_ten, val_grid_ten,val_label_tensor.shape[0]) # last arg changed from val_batch_size
+                        if torch.isnan(predict_labels).any(): print(f'There are NaN items in predict_labels')
                         # aux_loss = loss_fun(aux_outputs, point_label_tensor)
                         loss = lovasz_softmax(torch.nn.functional.softmax(predict_labels).detach(), val_label_tensor,
                                               ignore=0) + loss_func(predict_labels.detach(), val_label_tensor)

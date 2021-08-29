@@ -43,6 +43,7 @@ def main(args):
     grid_size = model_config['output_shape']
     num_class = model_config['num_class']
     ignore_label = dataset_config['ignore_label']
+    if ignore_label == -1: ignore_label = None # -1 to None
 
     model_load_path = train_hypers['model_load_path']
     model_save_path = train_hypers['model_save_path']

@@ -30,7 +30,7 @@ def build(dataset_config,
                                 return_ref=train_ref, label_mapping=label_mapping, nusc=nusc)
     val_pt_dataset = SemKITTI(data_path, imageset=val_imageset,
                               return_ref=val_ref, label_mapping=label_mapping, nusc=nusc)
-    
+    if dataset_config["ignore_label"] == -1: dataset_config["ignore_label"] = None # -1 to None
     train_dataset = get_model_class(dataset_config['dataset_type'])(
         train_pt_dataset,
         grid_size=grid_size,

@@ -304,4 +304,5 @@ class Asymm_3d_spconv(nn.Module):
 
         logits = self.logits(up0e)
         y = logits.dense()
+        if torch.isnan(y).any(): print(f'NaN found in Asymm_3d_spconv!')
         return y

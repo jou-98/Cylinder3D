@@ -86,14 +86,6 @@ def main(args):
         #print(f'Percentage of memory free: {round((r-a)/t*100,2)}')
         print(f'Currently using GPU number {torch.cuda.current_device()}.')
         for i_iter, (_, train_vox_label, train_grid, _, train_pt_fea) in enumerate(train_dataset_loader):
-            """
-            t = torch.cuda.get_device_properties(0).total_memory
-            r = torch.cuda.memory_reserved(0)
-            print(f'Reserved memory: {r/(1000000000)}G')
-            #print(f'Allocated memory: {a/(1000000000)}G')
-            print(f'Total memory: {t/(1000000000)}G')
-            print(f'Percentage of memory free: {round(1-(t-r)/t*100,2)}')
-            """
             if global_iter % check_iter == 0 and epoch >= 1:
                 my_model.eval()
                 hist_list = []
@@ -146,8 +138,7 @@ def main(args):
             outputs = my_model(train_pt_fea_ten, train_vox_ten, train_batch_size)
             loss = lovasz_softmax(torch.nn.functional.softmax(outputs), point_label_tensor, ignore=0) + loss_func(
                 outputs, point_label_tensor)
-            print(f'Softmax is {lovasz_softmax(torch.nn.functional.softmax(outputs), point_label_tensor, ignore=0)} and loss is {loss_func(
-                                outputs, point_label_tensor)}.')
+            print(f'Softmax is {lovasz_softmax(torch.nn.functional.softmax(outputs), point_label_tensor, ignore=0)} and loss is {loss_func(outputs, point_label_tensor)}.')
             loss.backward()
             optimizer.step()
             loss_list.append(loss.item())

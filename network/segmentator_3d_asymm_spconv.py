@@ -297,12 +297,12 @@ class Asymm_3d_spconv(nn.Module):
         up3e = self.upBlock1(up4e, down3b)
         up2e = self.upBlock2(up3e, down2b)
         up1e = self.upBlock3(up2e, down1b)
-        if torch.isnan(up1e).any(): print(f'up1e has NaN values in Asymm_3d_spconv!')
+        if torch.isnan(torch.Tensor(up1e)).any(): print(f'up1e has NaN values in Asymm_3d_spconv!')
         up0e = self.ReconNet(up1e)
 
         up0e.features = torch.cat((up0e.features, up1e.features), 1)
-        if torch.isnan(up0e).any(): print(f'up0e has NaN values in Asymm_3d_spconv!')
+        if torch.isnan(torch.Tensor(up0e)).any(): print(f'up0e has NaN values in Asymm_3d_spconv!')
         logits = self.logits(up0e)
-        if torch.isnan(logits).any(): print(f'logits has NaN values in Asymm_3d_spconv!')
+        if torch.isnan(torch.Tensor(logits)).any(): print(f'logits has NaN values in Asymm_3d_spconv!')
         y = logits.dense()
         return y

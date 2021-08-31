@@ -248,7 +248,6 @@ class cylinder_dataset(data.Dataset):
         if (intervals == 0).any(): print("Zero interval!")
         grid_ind = (np.floor((np.clip(xyz_pol, min_bound, max_bound) - min_bound) / intervals)).astype(np.int)
 
-        print(f'Shape of grid_ind is {grid_ind.shape}')
         grid_ind.tofile(str(index)+'.bin')
 
         voxel_position = np.zeros(self.grid_size, dtype=np.float32)
@@ -267,7 +266,6 @@ class cylinder_dataset(data.Dataset):
         voxel_centers = (grid_ind.astype(np.float32) + 0.5) * intervals + min_bound
         return_xyz = xyz_pol - voxel_centers
         return_xyz = np.concatenate((return_xyz, xyz_pol, xyz[:, :2]), axis=1)
-        print(f'Shape of return_xyz is {return_xyz.shape}')
         if len(data) == 2:
             return_fea = return_xyz
         elif len(data) == 3:

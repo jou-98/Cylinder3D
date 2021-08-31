@@ -130,7 +130,6 @@ def main(args):
 
             # forward + backward + optimize
             outputs = my_model(train_pt_fea_ten, train_vox_ten, train_batch_size)
-            print(f'Shape of outputs is {outputs.shape}')
             loss = lovasz_softmax(torch.nn.functional.softmax(outputs), point_label_tensor, ignore=0) + loss_func(
                 outputs, point_label_tensor)
             loss.backward()

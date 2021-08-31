@@ -230,7 +230,7 @@ class cylinder_dataset(data.Dataset):
             xyz[:, 0:3] += noise_translate
 
         xyz_pol = cart2polar(xyz)
-        print(f'rho range: [{np.min(xyz_pol[:,0])},{np.max(xyz_pol[:,0])}]; phi range: [{np.min(xyz_pol[:,1])},{np.max(xyz_pol[:,1])}]; z range: [{np.min(xyz_pol[:,2])},{np.max(xyz_pol[:,2])}]')
+        #print(f'rho range: [{np.min(xyz_pol[:,0])},{np.max(xyz_pol[:,0])}]phi range: [{np.min(xyz_pol[:,1])},{np.max(xyz_pol[:,1])}]; z range: [{np.min(xyz_pol[:,2])},{np.max(xyz_pol[:,2])}]')
         max_bound_r = np.percentile(xyz_pol[:, 0], 100, axis=0)
         min_bound_r = np.percentile(xyz_pol[:, 0], 0, axis=0)
         max_bound = np.max(xyz_pol[:, 1:], axis=0)

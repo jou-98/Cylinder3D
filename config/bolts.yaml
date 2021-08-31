@@ -30,11 +30,11 @@ dataset_params:
   label_mapping: "./config/label_mapping/bolts.yaml"
   max_volume_space:
     - 10
-    - 3.1415926
+    - 1.5
     - 5
   min_volume_space:
     - 5
-    - -3.1415926
+    - -2
     - 1
 
 ###################

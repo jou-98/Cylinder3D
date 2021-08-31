@@ -14,7 +14,6 @@ import yaml
 from torch.utils import data
 import pickle
 
-import open3d as o3d
 import numpy as np
 
 REGISTERED_DATASET_CLASSES = {}

@@ -24,7 +24,7 @@ model_params:
 dataset_params:
   dataset_type: "cylinder_dataset"
   pc_dataset_type: "Rockbolts_sk"
-  ignore_label: 2
+  ignore_label: 5
   return_test: False
   fixed_volume_space: True
   label_mapping: "./config/label_mapping/bolts.yaml"
@@ -64,5 +64,5 @@ train_params:
   model_save_path: "./model_save_dir/rb_model_save.pt"
   checkpoint_every_n_steps: 4599
   max_num_epochs: 40
-  eval_every_n_steps: 40
+  eval_every_n_steps: 20
   learning_rate: 0.001

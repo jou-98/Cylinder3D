@@ -97,8 +97,7 @@ class voxel_dataset(data.Dataset):
         if (intervals == 0).any(): print("Zero interval!")
 
         grid_ind = (np.floor((np.clip(xyz, min_bound, max_bound) - min_bound) / intervals)).astype(np.int)
-        print(f'Shape of grid_ind is {grid_ind.shape}')
-        grid_ind.tofile(str(index)+'.bin')
+
         # process voxel position
         voxel_position = np.zeros(self.grid_size, dtype=np.float32)
         dim_array = np.ones(len(self.grid_size) + 1, int)
@@ -250,7 +249,8 @@ class cylinder_dataset(data.Dataset):
         if (intervals == 0).any(): print("Zero interval!")
         grid_ind = (np.floor((np.clip(xyz_pol, min_bound, max_bound) - min_bound) / intervals)).astype(np.int)
 
-
+        print(f'Shape of grid_ind is {grid_ind.shape}')
+        grid_ind.tofile(str(index)+'.bin')
 
         voxel_position = np.zeros(self.grid_size, dtype=np.float32)
         dim_array = np.ones(len(self.grid_size) + 1, int)

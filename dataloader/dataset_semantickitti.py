@@ -147,7 +147,6 @@ class cylinder_dataset(data.Dataset):
                  scale_aug=False,
                  transform_aug=False, trans_std=[0.1, 0.1, 0.1],
                  min_rad=-np.pi / 4, max_rad=np.pi / 4):
-        start = time.time()
         self.point_cloud_dataset = in_dataset
         self.grid_size = np.asarray(grid_size)
         self.rotate_aug = rotate_aug
@@ -162,7 +161,6 @@ class cylinder_dataset(data.Dataset):
         self.trans_std = trans_std
 
         self.noise_rotation = np.random.uniform(min_rad, max_rad)
-        print(f'Cylinder dataset initialized, took {time.time()-start}s.')
 
     def __len__(self):
         'Denotes the total number of samples'
@@ -265,7 +263,7 @@ class cylinder_dataset(data.Dataset):
         voxel_centers = (grid_ind.astype(np.float32) + 0.5) * intervals + min_bound
         return_xyz = xyz_pol - voxel_centers
         return_xyz = np.concatenate((return_xyz, xyz_pol, xyz[:, :2]), axis=1)
-
+        print(f'Shape of return_xyz is {return_xyz.shape}')
         if len(data) == 2:
             return_fea = return_xyz
         elif len(data) == 3:

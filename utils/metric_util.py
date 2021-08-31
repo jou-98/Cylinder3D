@@ -13,6 +13,10 @@ def fast_hist(pred, label, n):
 
 
 def per_class_iu(hist):
+    print(f'hist.sum(1) is {hist.sum(1)}')
+    print(f'hist.sum(0) is {hist.sum(0)}')
+    print(f'np.diag(hist) is {np.diag(hist)}')
+    if np.isnan(hist.sum(1) + hist.sum(0) - np.diag(hist)).any(): print(f'Denominator has NaN')
     return np.diag(hist) / (hist.sum(1) + hist.sum(0) - np.diag(hist))
 
 

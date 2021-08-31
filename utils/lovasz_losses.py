@@ -186,6 +186,7 @@ def lovasz_softmax_flat(probas, labels, classes='present'):
         print(f'All void pixels in lovasz_softmax_flat!')
         return probas * 0.
     C = probas.size(1)
+    print(f'Number of class predictions is {C}')
     losses = []
     class_to_sum = list(range(C)) if classes in ['all', 'present'] else classes
     for c in class_to_sum:
@@ -203,7 +204,6 @@ def lovasz_softmax_flat(probas, labels, classes='present'):
         perm = perm.data
         fg_sorted = fg[perm]
         losses.append(torch.dot(errors_sorted, Variable(lovasz_grad(fg_sorted))))
-        print(f'Evaluating lovasz loss for class {c}......')
     print(f'Mean lovasz loss is {mean(losses)}')
     return mean(losses)
 

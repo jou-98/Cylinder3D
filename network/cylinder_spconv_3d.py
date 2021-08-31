@@ -41,7 +41,7 @@ class cylinder_asym(nn.Module):
 
     def forward(self, train_pt_fea_ten, train_vox_ten, batch_size):
         coords, features_3d = self.cylinder_3d_generator(train_pt_fea_ten, train_vox_ten)
-        if torch.isnan(features_3d).any(): print(f'features_3d has NaN values in Asymm_3d_spconv!')
+        #if torch.isnan(features_3d).any(): print(f'features_3d has NaN values in Asymm_3d_spconv!')
         spatial_features = self.cylinder_3d_spconv_seg(features_3d, coords, batch_size)
 
         return spatial_features

@@ -81,6 +81,5 @@ class cylinder_fea(nn.Module):
             processed_pooled_data = self.fea_compression(pooled_data)
         else:
             processed_pooled_data = pooled_data
-        if torch.isnan(processed_pooled_data).any(): print(f'processed pool data has NaN values in cylinder_fea!')
 
         return unq, processed_pooled_data

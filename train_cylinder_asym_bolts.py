@@ -48,7 +48,7 @@ def main(args):
     model_save_path = train_hypers['model_save_path']
 
     bolts_label_name = get_bolts_label_name(dataset_config["label_mapping"])
-    unique_label = np.asarray(sorted(list(bolts_label_name.keys())))[1:] - 1
+    unique_label = np.asarray(sorted(list(bolts_label_name.keys())))[0:] - 1
     unique_label_str = [bolts_label_name[x] for x in unique_label + 1]
     print(f'unique_label_str: {unique_label_str}')
 

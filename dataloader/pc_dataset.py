@@ -406,7 +406,8 @@ def get_bolts_label_name(label_mapping):
     for i in sorted(list(boltsyaml['learning_map'].keys()))[::-1]:
         print(f'i = {i}')
         bolts_label_name[boltsyaml['learning_map'][i]] = boltsyaml['labels'][i]
-
+        print(f"key {boltsyaml['learning_map'][i]} is assigned value {boltsyaml['labels'][i]}")
+    print(f'bolts_label_name = {bolts_label_name}')
     return bolts_label_name
 
 def get_nuScenes_label_name(label_mapping):

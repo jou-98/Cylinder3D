@@ -285,6 +285,7 @@ class Asymm_3d_spconv(nn.Module):
         coors = coors.int()
         # import pdb
         # pdb.set_trace()
+        if torch.isnan(voxel_features).any(): print(f'voxel features has NaN values in Asymm_3d_spconv!')
         ret = spconv.SparseConvTensor(voxel_features, coors, self.sparse_shape,
                                       batch_size)
         ret = self.downCntx(ret)

@@ -43,7 +43,6 @@ def main(args):
     grid_size = model_config['output_shape']
     num_class = model_config['num_class']
     ignore_label = dataset_config['ignore_label']
-    if ignore_label == -1: ignore_label = None # -1 to None
 
     model_load_path = train_hypers['model_load_path']
     model_save_path = train_hypers['model_save_path']
@@ -51,6 +50,7 @@ def main(args):
     bolts_label_name = get_bolts_label_name(dataset_config["label_mapping"])
     unique_label = np.asarray(sorted(list(bolts_label_name.keys())))[1:] - 1
     unique_label_str = [bolts_label_name[x] for x in unique_label + 1]
+    print(f'unique_label_str: {unique_label_str}')
 
     my_model = model_builder.build(model_config)
     #my_model = torch.nn.DataParallel(my_model)
@@ -81,10 +81,6 @@ def main(args):
         pbar = tqdm(total=len(train_dataset_loader))
         time.sleep(10)
         # lr_scheduler.step(epoch)
-        t = torch.cuda.get_device_properties(0).total_memory
-        r = torch.cuda.memory_reserved(0)
-        a = torch.cuda.memory_allocated(0)
-        #print(f'Percentage of memory free: {round((r-a)/t*100,2)}')
         print(f'Currently using GPU number {torch.cuda.current_device()}.')
         for i_iter, (_, train_vox_label, train_grid, _, train_pt_fea) in enumerate(train_dataset_loader):
             if global_iter % check_iter == 0 and epoch >= 1:

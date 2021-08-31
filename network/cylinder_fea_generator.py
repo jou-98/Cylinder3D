@@ -54,7 +54,8 @@ class cylinder_fea(nn.Module):
 
     def forward(self, pt_fea, xy_ind):
         cur_dev = pt_fea[0].get_device()
-
+        if torch.isnan(pt_fea).any(): print(f'pt_fea has NaN values in cylinder_fea!')
+        if torch.isnan(xy_ind).any(): print(f'xy_ind has NaN values in cylinder_fea!')
         # concate everything
         cat_pt_ind = []
         for i_batch in range(len(xy_ind)):

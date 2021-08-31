@@ -3,6 +3,7 @@
 # @file: cylinder_spconv_3d.py
 
 from torch import nn
+import torch
 
 REGISTERED_MODELS_CLASSES = {}
 

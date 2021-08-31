@@ -14,6 +14,9 @@ import yaml
 from torch.utils import data
 import pickle
 
+import open3d as o3d
+import numpy as np
+
 REGISTERED_DATASET_CLASSES = {}
 
 
@@ -94,7 +97,8 @@ class voxel_dataset(data.Dataset):
         if (intervals == 0).any(): print("Zero interval!")
 
         grid_ind = (np.floor((np.clip(xyz, min_bound, max_bound) - min_bound) / intervals)).astype(np.int)
-
+        print(f'Shape of grid_ind is {grid_ind.shape}')
+        grid_ind.tofile(str(index)+'.bin')
         # process voxel position
         voxel_position = np.zeros(self.grid_size, dtype=np.float32)
         dim_array = np.ones(len(self.grid_size) + 1, int)
@@ -246,6 +250,8 @@ class cylinder_dataset(data.Dataset):
         if (intervals == 0).any(): print("Zero interval!")
         grid_ind = (np.floor((np.clip(xyz_pol, min_bound, max_bound) - min_bound) / intervals)).astype(np.int)
 
+
+
         voxel_position = np.zeros(self.grid_size, dtype=np.float32)
         dim_array = np.ones(len(self.grid_size) + 1, int)
         dim_array[0] = -1
@@ -255,7 +261,6 @@ class cylinder_dataset(data.Dataset):
         processed_label = np.ones(self.grid_size, dtype=np.uint8) * self.ignore_label
         label_voxel_pair = np.concatenate([grid_ind, labels], axis=1)
         label_voxel_pair = label_voxel_pair[np.lexsort((grid_ind[:, 0], grid_ind[:, 1], grid_ind[:, 2])), :]
-        #print(f'Shape of label-voxel pair is {label_voxel_pair.shape}, shape of processed label is {processed_label.shape}')
         processed_label = nb_process_label(np.copy(processed_label), label_voxel_pair)
         data_tuple = (voxel_position, processed_label)
 

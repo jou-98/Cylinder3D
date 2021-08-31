@@ -49,8 +49,9 @@ def main(args):
 
     bolts_label_name = get_bolts_label_name(dataset_config["label_mapping"])
     unique_label = np.asarray(sorted(list(bolts_label_name.keys())))[0:] - 1
-    unique_label_str = [bolts_label_name[x] for x in unique_label + 1]
+    unique_label_str = [bolts_label_name[x] for x in unique_label]
     print(f'unique_label_str: {unique_label_str}')
+
 
     my_model = model_builder.build(model_config)
     #my_model = torch.nn.DataParallel(my_model)

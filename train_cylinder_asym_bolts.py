@@ -112,7 +112,9 @@ def main(args):
                                                             unique_label))
                         val_loss_list.append(loss.detach().cpu().numpy())
                 my_model.train()
+                if np.isnan(hist_list).any(): print(f'hist_list has NaN!')
                 iou = per_class_iu(sum(hist_list))
+                if np.isnan(iou).any(): print(f'iou has NaN!')
                 print('Validation per class iou: ')
                 for class_name, class_iou in zip(unique_label_str, iou):
                     print('%s : %.2f%%' % (class_name, class_iou * 100))

@@ -98,6 +98,7 @@ def main(args):
 
                         predict_labels = my_model(val_pt_fea_ten, val_grid_ten,val_label_tensor.shape[0]) # last arg changed from val_batch_size
                         print(f'Checking predict_labels before feeding to loss function......')
+                        print(f'predict_labels.shape is {predict_labels.shape}')
                         assert not torch.isnan(predict_labels).any()
                         if torch.isnan(torch.nn.functional.softmax(predict_labels).detach()).any(): print(f'There are NaN items in softmax layer')
                         # aux_loss = loss_fun(aux_outputs, point_label_tensor)

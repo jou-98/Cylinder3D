@@ -26,7 +26,7 @@ dataset_params:
   pc_dataset_type: "Rockbolts_sk"
   ignore_label: 5
   return_test: False
-  fixed_volume_space: True
+  fixed_volume_space: False
   label_mapping: "./config/label_mapping/bolts.yaml"
   max_volume_space:
     - 10

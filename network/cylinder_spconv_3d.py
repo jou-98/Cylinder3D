@@ -39,8 +39,10 @@ class cylinder_asym(nn.Module):
         self.sparse_shape = sparse_shape
 
     def forward(self, train_pt_fea_ten, train_vox_ten, batch_size):
+        if torch.isnan(train_pt_fea_ten).any(): print(f'train_pt_fea_ten has NaN values in Asymm_3d_spconv!')
+        if torch.isnan(train_vox_ten).any(): print(f'train_vox_ten has NaN values in Asymm_3d_spconv!')
         coords, features_3d = self.cylinder_3d_generator(train_pt_fea_ten, train_vox_ten)
-
+        if torch.isnan(features_3d).any(): print(f'features_3d has NaN values in Asymm_3d_spconv!')
         spatial_features = self.cylinder_3d_spconv_seg(features_3d, coords, batch_size)
 
         return spatial_features

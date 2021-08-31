@@ -187,6 +187,7 @@ def lovasz_softmax_flat(probas, labels, classes='present'):
         return probas * 0.
     C = probas.size(1)
     losses = []
+    print(f'classes is {classes}')
     class_to_sum = list(range(C)) if classes in ['all', 'present'] else classes
     print(f'class_to_sum is: {class_to_sum}')
     for c in class_to_sum:

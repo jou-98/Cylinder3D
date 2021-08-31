@@ -402,7 +402,7 @@ def get_bolts_label_name(label_mapping):
     with open(label_mapping, 'r') as stream:
         boltsyaml = yaml.safe_load(stream)
     bolts_label_name = dict()
-    print(f'Learning map: {boltsyaml['learning_map']}')
+    print(f"Learning map: {boltsyaml['learning_map']}")
     for i in sorted(list(boltsyaml['learning_map'].keys()))[::-1]:
         print(f'i = {i}')
         bolts_label_name[boltsyaml['learning_map'][i]] = boltsyaml['labels'][i]

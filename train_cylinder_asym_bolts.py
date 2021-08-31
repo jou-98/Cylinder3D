@@ -49,9 +49,7 @@ def main(args):
 
     bolts_label_name = get_bolts_label_name(dataset_config["label_mapping"])
     unique_label = np.asarray(sorted(list(bolts_label_name.keys())))[0:]
-    print(f'unique_label is {unique_label}')
     unique_label_str = [bolts_label_name[x] for x in unique_label]
-    print(f'unique_label_str: {unique_label_str}')
 
 
     my_model = model_builder.build(model_config)
@@ -104,7 +102,7 @@ def main(args):
                         if torch.isnan(torch.nn.functional.softmax(predict_labels).detach()).any(): print(f'There are NaN items in softmax layer')
                         # aux_loss = loss_fun(aux_outputs, point_label_tensor)
                         loss = lovasz_softmax(torch.nn.functional.softmax(predict_labels).detach(), val_label_tensor,
-                                              ignore=0) + loss_func(predict_labels.detach(), val_label_tensor)
+                                              ignore=0,classes=[1]) + loss_func(predict_labels.detach(), val_label_tensor)
                         predict_labels = torch.argmax(predict_labels, dim=1)
                         predict_labels = predict_labels.cpu().detach().numpy()
                         for count, i_val_grid in enumerate(val_grid):

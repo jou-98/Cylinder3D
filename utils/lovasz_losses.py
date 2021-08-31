@@ -179,8 +179,8 @@ def lovasz_softmax_flat(probas, labels, classes='present'):
       labels: [P] Tensor, ground truth labels (between 0 and C - 1)
       classes: 'all' for all, 'present' for classes present in labels, or a list of classes to average.
     """
-    #if torch.isnan(probas).any(): print(f'probas in lovasz_softmax_flat has NaN!')
-    #if torch.isnan(labels).any(): print(f'labels in lovasz_softmax_flat has NaN!')
+    # if torch.isnan(probas).any(): print(f'probas in lovasz_softmax_flat has NaN!')
+    # if torch.isnan(labels).any(): print(f'labels in lovasz_softmax_flat has NaN!')
     if probas.numel() == 0:
         # only void pixels, the gradients should be 0
         print(f'All void pixels in lovasz_softmax_flat!')

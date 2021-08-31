@@ -22,7 +22,7 @@ learning_map_inv: # inverse of previous map
   1 : 1    # "bolt" 
 
 learning_ignore: # Ignore classes
-  0: False     # "background"
+  0: True     # "background"
   1: False     # "bolt"
 
 split: # sequence numbers

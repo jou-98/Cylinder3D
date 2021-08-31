@@ -404,6 +404,7 @@ def get_bolts_label_name(label_mapping):
     bolts_label_name = dict()
     print(f'Learning map: {boltsyaml['learning_map']}')
     for i in sorted(list(boltsyaml['learning_map'].keys()))[::-1]:
+        print(f'i = {i}')
         bolts_label_name[boltsyaml['learning_map'][i]] = boltsyaml['labels'][i]
 
     return bolts_label_name

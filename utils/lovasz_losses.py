@@ -186,9 +186,9 @@ def lovasz_softmax_flat(probas, labels, classes='present'):
         print(f'All void pixels in lovasz_softmax_flat!')
         return probas * 0.
     C = probas.size(1)
-    print(f'Number of class predictions is {C}')
     losses = []
     class_to_sum = list(range(C)) if classes in ['all', 'present'] else classes
+    print(f'class_to_sum has {len(class_to_sum)} members')
     for c in class_to_sum:
         fg = (labels == c).float() # foreground for class c
         if (classes is 'present' and fg.sum() == 0):
@@ -228,6 +228,7 @@ def flatten_probas(probas, labels, ignore=None):
     valid = (labels != ignore)
     vprobas = probas[valid.nonzero().squeeze()]
     vlabels = labels[valid]
+    print(f'Ignore = {ignore}')
     return vprobas, vlabels
 
 def xloss(logits, labels, ignore=None):

@@ -97,7 +97,6 @@ def main(args):
                         val_label_tensor = val_vox_label.type(torch.LongTensor).to(pytorch_device)
 
                         predict_labels = my_model(val_pt_fea_ten, val_grid_ten,val_label_tensor.shape[0]) # last arg changed from val_batch_size
-                        print(f'Checking predict_labels before feeding to loss function......')
                         print(f'predict_labels.shape is {predict_labels.shape}')
                         assert not torch.isnan(predict_labels).any()
                         if torch.isnan(torch.nn.functional.softmax(predict_labels).detach()).any(): print(f'There are NaN items in softmax layer')
@@ -106,7 +105,6 @@ def main(args):
                                               ignore=0, classes=[1]) + loss_func(predict_labels.detach(), val_label_tensor)
                         predict_labels = torch.argmax(predict_labels, dim=1)
                         predict_labels = predict_labels.cpu().detach().numpy()
-                        print(f'Shape of predict_labels is {predict_labels.shape}')
                         for count, i_val_grid in enumerate(val_grid):
                             hist_list.append(fast_hist_crop(predict_labels[
                                                                 count, val_grid[count][:, 0], val_grid[count][:, 1],
@@ -114,9 +112,7 @@ def main(args):
                                                             unique_label))
                         val_loss_list.append(loss.detach().cpu().numpy())
                 my_model.train()
-                if np.isnan(hist_list).any(): print(f'hist_list has NaN!')
                 iou = per_class_iu(sum(hist_list))
-                if np.isnan(iou).any(): print(f'iou has NaN!')
                 print('Validation per class iou: ')
                 for class_name, class_iou in zip(unique_label_str, iou):
                     print('%s : %.2f%%' % (class_name, class_iou * 100))
